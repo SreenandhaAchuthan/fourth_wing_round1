@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import 'aos/dist/aos.css';
 import 'font-awesome/css/font-awesome.min.css';
 import FossApp from './foss';
@@ -84,7 +84,7 @@ const App = () => {
 
   return (
     <AuthProvider>
-      <BrowserRouter>
+      <Router>
         {isLoading && <Loader onLoadingComplete={handleLoadingComplete} />}
         <CustomCursor />
         <Routes>
@@ -123,7 +123,7 @@ const App = () => {
           <Route path="/round2/leaderboard" element={<Leaderboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
+      </Router>
     </AuthProvider>
   );
 };
