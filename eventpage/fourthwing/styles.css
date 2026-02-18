@@ -1,0 +1,257 @@
+/* Fourth Wing Event Page Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #1a1a2e;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Particles Background */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+/* Container */
+.container {
+    position: relative;
+    z-index: 1;
+    padding: 2rem;
+    max-width: 500px;
+    width: 100%;
+}
+
+/* Event Card */
+.event-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 255, 136, 0.2);
+}
+
+/* Event Date Card */
+.event-date-card {
+    background: linear-gradient(135deg, #2d7a6e, #3d5a80);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.event-date-card .day {
+    display: block;
+    font-size: 4rem;
+    font-weight: 700;
+    color: #00ff88;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.event-date-card .month {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #ffffff;
+}
+
+/* Event Details */
+.event-details {
+    text-align: center;
+}
+
+.event-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #00ff88, #00d4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.event-description {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2rem;
+}
+
+/* Event Actions */
+.event-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.event-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.event-btn i {
+    font-size: 1.1rem;
+}
+
+/* Round 1 Button - Purple Gradient */
+.round1-btn {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #ffffff;
+    border: 2px solid #667eea;
+}
+
+.round1-btn:hover {
+    background: linear-gradient(135deg, #764ba2, #667eea);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* Round 2 Button - Pink Gradient */
+.round2-btn {
+    background: linear-gradient(135deg, #ec4899, #8b5cf6);
+    color: #ffffff;
+    border: 2px solid #ec4899;
+}
+
+.round2-btn:hover {
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
+}
+
+/* Event Ended Button - Green */
+.ended-btn {
+    background: #2d7a6e;
+    color: rgba(255, 255, 255, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.ended-btn:hover {
+    transform: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Back to Home */
+.back-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #00ff88;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.back-home:hover {
+    background: rgba(0, 255, 136, 0.1);
+    border-color: #00ff88;
+    transform: translateX(-5px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .event-card {
+        padding: 1.5rem;
+    }
+
+    .event-date-card .day {
+        font-size: 3rem;
+    }
+
+    .event-title {
+        font-size: 2rem;
+    }
+
+    .event-description {
+        font-size: 1rem;
+    }
+
+    .event-btn {
+        padding: 0.875rem 1.25rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .event-date-card .day {
+        font-size: 2.5rem;
+    }
+
+    .event-title {
+        font-size: 1.75rem;
+    }
+
+    .event-btn {
+        padding: 0.75rem 1rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.event-card {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.back-home {
+    animation: fadeIn 0.8s ease-out;
+}

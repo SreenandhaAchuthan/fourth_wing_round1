@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fourth Wing - AMC FOSS Event</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="event-card">
+            <!-- Event Date -->
+            <div class="event-date-card">
+                <span class="day">30</span>
+                <span class="month">JAN</span>
+            </div>
+
+            <!-- Event Details -->
+            <div class="event-details">
+                <h1 class="event-title">Fourth Wing</h1>
+                <p class="event-description">Join us for an amazing event!</p>
+
+                <!-- Action Buttons -->
+                <div class="event-actions">
+                    <a href="../round1/index.html" class="event-btn round1-btn">
+                        <i class="fas fa-pen-fancy"></i>
+                        GO TO ROUND 1 (MCQ)
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                    <a href="../../src/pages/round2/Round2Manager.jsx" class="event-btn round2-btn"
+                        onclick="navigateToRound2(event)">
+                        <i class="fas fa-gamepad"></i>
+                        GO TO ROUND 2.0
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                    <button class="event-btn ended-btn" disabled>
+                        <i class="fas fa-calendar-times"></i>
+                        EVENT ENDED
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back to Home -->
+        <a href="../../index.html" class="back-home" onclick="navigateToHome(event)">
+            <i class="fas fa-home"></i> Back to Home
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize particles
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 40 },
+                color: { value: "#00ff88" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#00ff88",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 6,
+                    direction: "none",
+                    random: false,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            }
+        });
+
+        // Navigation functions
+        function navigateToRound2(event) {
+            event.preventDefault();
+            // Navigate to the React app's round2 route
+            window.location.href = window.location.origin + '/round2';
+        }
+
+        function navigateToHome(event) {
+            event.preventDefault();
+            // Navigate to the React app's home
+            window.location.href = window.location.origin + '/';
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,271 @@
+/* Challenge 8: Medic's Triage */
+#challenge-8 {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.triage-hud {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    background: rgba(10, 25, 47, 0.8);
+    border: 1px solid #00f0ff;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+}
+
+.hud-metric {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.scifi-label {
+    font-size: 0.8em;
+    color: #00f0ff;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.scifi-value {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 5px #00f0ff;
+}
+
+.scifi-value.critical {
+    color: #ff3333;
+    text-shadow: 0 0 5px #ff0000;
+    animation: flash 0.5s infinite;
+}
+
+.timer-bar-container {
+    width: 100%;
+    height: 10px;
+    background: #333;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.timer-bar-fill {
+    height: 100%;
+    background: #ff3333;
+    transition: width 0.1s linear;
+}
+
+/* Squad Grid */
+.squad-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.squad-member {
+    background: rgba(20, 30, 50, 0.9);
+    border: 2px solid #336699;
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.squad-member:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    border-color: #00f0ff;
+}
+
+.squad-member.critical {
+    border-color: #ff3333;
+    background: rgba(50, 10, 10, 0.9);
+}
+
+.squad-member.stable {
+    border-color: #00ff88;
+    background: rgba(10, 50, 20, 0.9);
+}
+
+.member-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.member-hp {
+    font-family: monospace;
+}
+
+/* Health Bar */
+.health-track {
+    width: 100%;
+    height: 12px;
+    background: #111;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+}
+
+.health-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #ff3333, #ffff00, #00ff88);
+    width: 50%;
+    /* driven by JS */
+    transition: width 0.3s ease-out;
+    position: relative;
+}
+
+.bar-glare {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.threshold-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #fff;
+    border-left: 1px dashed #000;
+    z-index: 5;
+    opacity: 0.7;
+}
+
+/* Effects */
+.shield-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5em;
+    opacity: 0.8;
+}
+
+.danger-pulse {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid #ff0000;
+    border-radius: 12px;
+    animation: danger-pulse 1s infinite;
+    pointer-events: none;
+}
+
+.floating-text {
+    position: fixed;
+    color: #00ff88;
+    font-weight: bold;
+    font-size: 1.5em;
+    pointer-events: none;
+    animation: floatUp 1s forwards;
+    z-index: 1000;
+    text-shadow: 0 0 5px #000;
+}
+
+@keyframes danger-pulse {
+    0% {
+        opacity: 0;
+        box-shadow: inset 0 0 0 #f00;
+    }
+
+    50% {
+        opacity: 1;
+        box-shadow: inset 0 0 20px #f00;
+    }
+
+    100% {
+        opacity: 0;
+        box-shadow: inset 0 0 0 #f00;
+    }
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+}
+
+@keyframes flash {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.shake-screen {
+    animation: shake 0.5s infinite;
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}

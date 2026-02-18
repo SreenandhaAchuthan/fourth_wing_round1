@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Round 1 - Programming Proficiency Assessment</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="dark-theme">
+    <!-- Warning Modal -->
+    <div id="warningModal" class="modal">
+        <div class="modal-content">
+            <h2>⚠️ Fullscreen Required</h2>
+            <p>You must remain in fullscreen mode during the exam.</p>
+            <p class="timer">Press F12 to return to fullscreen: <span id="countdown">5</span>s</p>
+            <div class="warning-note">Failure to comply will result in elimination!</div>
+        </div>
+    </div>
+
+    <!-- Elimination Screen -->
+    <div id="eliminationScreen" class="elimination-screen hidden">
+        <div class="elimination-content">
+            <h1>❌ ELIMINATED</h1>
+            <p>You have violated exam protocols.</p>
+            <p class="reason" id="eliminationReason"></p>
+            <p class="contact">Please contact the exam administrator.</p>
+        </div>
+    </div>
+
+    <!-- Welcome Screen -->
+    <div id="welcomeScreen" class="welcome-screen">
+        <div class="welcome-content">
+            <h1>🎯 Programming Proficiency Assessment</h1>
+            <h2>Fourth Wing - Round 1</h2>
+
+            <div class="exam-details">
+                <div class="detail-item">
+                    <span class="icon">⏱️</span>
+                    <span class="label">Duration:</span>
+                    <span class="value">25 Minutes</span>
+                </div>
+                <div class="detail-item">
+                    <span class="icon">📝</span>
+                    <span class="label">Questions:</span>
+                    <span class="value">30</span>
+                </div>
+                <div class="detail-item">
+                    <span class="icon">🎯</span>
+                    <span class="label">Total Marks:</span>
+                    <span class="value">30</span>
+                </div>
+                <div class="detail-item">
+                    <span class="icon">✓</span>
+                    <span class="label">Negative Marking:</span>
+                    <span class="value">No</span>
+                </div>
+            </div>
+
+            <div class="instructions">
+                <h3>📋 Exam Rules & Instructions:</h3>
+                <ul>
+                    <li>✓ The exam will run in <strong>FULLSCREEN MODE</strong> only</li>
+                    <li>✓ <strong>Mouse navigation ONLY</strong> - Keyboard is disabled</li>
+                    <li>✓ Each question has only one correct answer</li>
+                    <li>✓ Read code snippets carefully before answering</li>
+                    <li>✓ Questions test Python, Java, and C fundamentals</li>
+                    <li>✓ Copy/Paste is <strong>DISABLED</strong></li>
+                    <li>✓ Right-click is <strong>DISABLED</strong></li>
+                    <li>✓ Press <strong>Alt+Q</strong> to exit the exam</li>
+                    <li>⚠️ Violation of any rule will result in <strong>ELIMINATION</strong></li>
+                </ul>
+            </div>
+
+            <div class="candidate-info">
+                <input type="text" id="candidateName" placeholder="Enter Your Name" required>
+                <input type="text" id="candidateId" placeholder="Enter Your Roll Number" required>
+            </div>
+
+            <button class="start-btn" onclick="startExam()">Start Exam</button>
+        </div>
+    </div>
+
+    <!-- Exam Screen -->
+    <div id="examScreen" class="exam-screen hidden">
+        <div class="exam-header">
+            <div class="candidate-details">
+                <span id="displayName"></span> | <span id="displayId"></span>
+            </div>
+            <div class="timer-display">
+                Time Remaining: <span id="examTimer">25:00</span>
+            </div>
+            <div class="question-counter">
+                Question <span id="currentQuestion">1</span> of <span id="totalQuestions">30</span>
+            </div>
+        </div>
+
+        <div class="exam-container">
+            <div class="question-section">
+                <h3 class="question-text" id="questionText"></h3>
+                <div class="options-container" id="optionsContainer"></div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="nav-btn" id="prevBtn" onclick="previousQuestion()">← Previous</button>
+                <button class="nav-btn clear-btn" onclick="clearAnswer()">Clear Answer</button>
+                <button class="nav-btn" id="nextBtn" onclick="nextQuestion()">Next →</button>
+                <button class="submit-btn hidden" id="submitBtn" onclick="submitExam()">Submit Exam</button>
+            </div>
+
+            <div class="question-palette">
+                <h4>Question Navigator</h4>
+                <p class="answered-stats"><span id="answeredCount">0</span> / <span id="totalQuestionsNav">30</span>
+                    Answered</p>
+                <div id="palette" class="palette-grid"></div>
+            </div>
+        </div>
+
+        <div class="exit-hint">Press Alt+Q to exit exam</div>
+    </div>
+
+    <!-- Results Screen -->
+    <div id="resultsScreen" class="results-screen hidden">
+        <div class="results-content">
+            <h1 id="resultEmoji">🎉</h1>
+            <h2 id="resultTitle">Exam Completed!</h2>
+            <div class="results-details">
+                <p><strong>Name:</strong> <span id="resultName"></span></p>
+                <p><strong>Roll Number:</strong> <span id="resultId"></span></p>
+                <p><strong>Score:</strong> <span id="resultScore" class="score-highlight"></span></p>
+                <p><strong>Percentage:</strong> <span id="resultPercentage"></span>%</p>
+                <p><strong>Status:</strong> <span id="resultStatus"></span></p>
+            </div>
+            <button class="restart-btn" onclick="location.reload()">Exit</button>
+        </div>
+    </div>
+
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+
+    <!-- Application Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="config.js"></script>
+    <script src="questions.js"></script>
+    <script src="../proctoring.js"></script>
+    <script src="exam.js"></script>
+    <script>
+        // Initialize particles for FOSS theme
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 40 },
+                color: { value: "#00ff88" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#00ff88", opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 6, direction: "none", random: false, straight: false, out_mode: "out", bounce: false }
+            }
+        });
+    </script>
+</body>
+
+</html>
